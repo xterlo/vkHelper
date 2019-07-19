@@ -97,7 +97,6 @@ def ScreenshotSend(message):
         screen = pyautogui.screenshot('C:\\Users\\'+username+'\\Pictures\\Camera Roll\\screenshot.png')
         serv = vk_api.photos.getMessagesUploadServer(v=5.00)
         photo_load = requests.post(serv['upload_url'], files={'photo': open('C:\\Users\\'+username+'\\Pictures\\Camera Roll\\screenshot.png', 'rb')}).json()
-        print(photo_load)
         errorvk=photo_save = vk_api.photos.saveMessagesPhoto(v=5.00,photo = photo_load['photo'], server= photo_load['server'], hash= photo_load['hash'])[0]
         error=photo_id = 'photo{}_{}'.format(photo_save['owner_id'], photo_save['id'])
         vk_api.messages.send(user_id=218094830,v=5.00,  attachment=photo_id)
@@ -206,9 +205,9 @@ def UploadDoc(message):
         messageurldoc = messagedictdoc['items'][0]['attachment']['doc']['url']
         messageextdoc = messagedictdoc['items'][0]['attachment']['doc']['ext']
         if messagetexttext[0] != "^":
-            f=open(messagetexttext+"\\"+messagetextdoc+"."+messageextdoc,"wb") #открываем файл для записи, в режиме wb
-            ufr = requests.get(messageurldoc) #делаем запрос
-            f.write(ufr.content) #записываем содержимое в файл; как видите - content запроса
+            f=open(messagetexttext+"\\"+messagetextdoc+"."+messageextdoc,"wb")
+            ufr = requests.get(messageurldoc)
+            f.write(ufr.content)
             f.close()
             message="^Файл успешно отправлен!^"
             VkMessageRespon(message)
