@@ -126,6 +126,7 @@ def CmdSend(message):
         waitcommand = 0
         cmdwork = 0
         command = "color a"
+        time.sleep(1)
         while cmdwork != 1:
             message="^Введите команду^"
             VkMessageRespon(message)
